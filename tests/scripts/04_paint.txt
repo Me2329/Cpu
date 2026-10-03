@@ -1,0 +1,39 @@
+# PAINT.PEX: mouse drawing straight into banked VRAM, palette, save.
+waitidle
+type PAINT\n
+wait 200
+expectmode 0x13
+expectpixel 10 10 15
+mouse 40 40 1
+mouse 120 40 1
+mouse 120 120 1
+mouse 120 120 0
+expectpixel 80 40 0
+expectpixel 120 80 0
+# pick red (swatch 4) and draw in the lower half of the framebuffer (bank 12+)
+mouse 55 185 1
+mouse 55 185 0
+type 3
+mouse 20 170 1
+mouse 300 170 1
+mouse 300 170 0
+expectpixel 160 170 4
+# right button erases
+mouse 120 80 2
+mouse 120 80 0
+expectpixel 120 80 15
+type s
+wait 100
+key ESC
+waitidle
+expectmode 0x03
+type DIR *.IMG\n
+waitidle
+expect PICTURE.IMG       57600   Paint image
+# reload the picture and check a pixel came back from disk
+type PAINT\n
+wait 200
+expectpixel 160 170 4
+expectpixel 80 40 0
+key ESC
+waitidle

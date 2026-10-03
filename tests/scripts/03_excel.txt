@@ -1,0 +1,49 @@
+# EXCEL.PEX: load a sheet, check formulas, edit cells, save, reload.
+waitidle
+type EXCEL BUDGET.XLS\n
+waitidle
+expect PERRY Excel
+expect Rent    |     800|     800|     800|    2400|     800
+expect Total   |    1255|    1240|    1237|    3732
+expect Biggest |        |        |        |    2400
+expect Smallest|        |        |        |     120
+expect Saved % |        |        |        |      17
+# B5: 320 -> 1000 ; totals must recalculate
+key DOWN 4
+key RIGHT 1
+type 1000\n
+waitidle
+expect Food    |    1000|     290|     310|    1600
+expect Total   |    1935|    1240|    1237|    4412
+# formula with precedence and parentheses in G5: (1000-310)*2+290
+key UP 1
+key RIGHT 5
+type =(B5-D5)*2+C5\n
+waitidle
+expect 1600|     533|    1670|
+# self reference in G4 -> #ERR, then clear it
+key UP 2
+type =G4+1\n
+waitidle
+expect 800|    #ERR|
+key UP 1
+key DEL
+waitidle
+expectnot #ERR
+key F2
+waitidle
+expect Spreadsheet saved
+key ESC
+waitidle
+# round trip: reopen the saved sheet
+type EXCEL BUDGET.XLS\n
+waitidle
+expect Spreadsheet loaded
+expect Food    |    1000|     290|     310|    1600|     533|    1670|
+key DOWN 4
+key RIGHT 6
+waitidle
+expect G5   | =(B5-D5)*2+C5
+key ESC
+waitidle
+expect A:\\>

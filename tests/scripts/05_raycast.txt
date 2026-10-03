@@ -1,0 +1,19 @@
+# RAYCAST.PEX: WAD loading, mode 13h rendering, movement, return to DOS.
+waitidle
+type RAYCAST\n
+wait 1000
+expectmode 0x13
+screenshot raycast.png
+key UP 8
+key LEFT 6
+key UP 4
+wait 300
+expectmode 0x13
+key ESC
+waitidle
+expectmode 0x03
+expect A:\\>
+# a missing WAD is reported cleanly
+type RAYCAST NOPE.WAD\n
+waitidle
+expect RAYCAST: cannot open WAD file NOPE.WAD

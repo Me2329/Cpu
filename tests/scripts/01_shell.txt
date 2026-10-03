@@ -1,0 +1,49 @@
+# Boot PERRY-DOS and exercise the built-in commands.
+waitidle
+expect PERRY-DOS 1.0
+expect A:\\>
+type VER\n
+waitidle
+expect PERRY-DOS Version 1.0
+type DIR *.PEX\n
+waitidle
+expect COMMAND.PEX
+expect WORD.PEX
+expect RAYCAST.PEX
+expectnot BUDGET.XLS
+type CLS\n
+waitidle
+type DIR\n
+waitidle
+expect BUDGET.XLS
+expect MAZE.WAD
+expect Game data (WAD)
+expect 9 file(s)
+type CLS\n
+waitidle
+type MEM\n
+waitidle
+expect Conventional         36864
+expect Largest executable program: 28672 bytes
+type CLS\n
+waitidle
+type HELLO alpha beta\n
+waitidle
+expect Hello from a .PEX program
+expect Arguments: alpha beta
+expect 1234 * 56 = 69104
+type NOSUCHPRG\n
+waitidle
+expect Bad command or file name
+type TYPE README.TXT\n
+waitidle
+expect Welcome to PERRY-DOS 1.0
+type CLS\n
+waitidle
+type DEL COMMAND.PEX\n
+waitidle
+expect Cannot delete file
+type TYPE MISSING.TXT\n
+waitidle
+expect File not found
+screenshot shell.png

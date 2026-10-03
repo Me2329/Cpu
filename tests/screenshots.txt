@@ -1,0 +1,63 @@
+# Regenerates docs/img/*.png  (make screenshots)
+waitidle
+type DIR\n
+waitidle
+screenshot docs/img/shell.png
+type EXPLORER\n
+waitidle
+key END
+key UP 1
+waitidle
+screenshot docs/img/explorer.png
+key ESC
+waitidle
+type WORD README.TXT\n
+waitidle
+key DOWN 6
+key END
+waitidle
+screenshot docs/img/word.png
+key ESC
+waitidle
+type EXCEL BUDGET.XLS\n
+waitidle
+key DOWN 8
+key RIGHT 4
+waitidle
+screenshot docs/img/excel.png
+key ESC
+waitidle
+type PAINT\n
+wait 200
+mouse 30 30 1
+mouse 110 30 1
+mouse 110 110 1
+mouse 30 30 1
+mouse 30 30 0
+mouse 55 185 1
+mouse 55 185 0
+type 4
+mouse 150 140 1
+mouse 200 60 1
+mouse 250 140 1
+mouse 150 140 1
+mouse 150 140 0
+mouse 31 185 1
+mouse 31 185 0
+type 6
+mouse 270 30 1
+mouse 300 80 1
+mouse 280 120 1
+mouse 280 120 0
+mouse 200 160 0
+screenshot docs/img/paint.png
+key ESC
+waitidle
+type RAYCAST\n
+wait 800
+key LEFT 3
+key UP 6
+wait 200
+screenshot docs/img/raycast.png
+key ESC
+waitidle

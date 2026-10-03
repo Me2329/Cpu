@@ -1,0 +1,33 @@
+# EXPLORER: browse the disk, open documents through file associations.
+waitidle
+type EXPLORER\n
+waitidle
+expect PERRY-DOS Explorer
+expect COMMAND.PEX
+expect Opens with
+# files are sorted: COMMAND.PEX, BUDGET.XLS, EXCEL.PEX, HELLO.PEX, MAZE.WAD, PAINT.PEX, ...
+key DOWN 1
+waitidle
+expect EXCEL.PEX
+key ENTER
+waitidle
+expect PERRY Excel
+expect BUDGET.XLS
+key ESC
+waitidle
+expect PERRY-DOS Explorer
+key END
+waitidle
+expect README.TXT
+key UP 1
+key ENTER
+waitidle
+expect PERRY Word
+expect Welcome to PERRY-DOS 1.0
+key ESC
+waitidle
+expect PERRY-DOS Explorer
+screenshot explorer.png
+key ESC
+waitidle
+expect A:\\>

@@ -1,0 +1,33 @@
+# WORD.PEX: create a document, edit it, save it and read it back.
+waitidle
+type WORD LETTER.TXT\n
+waitidle
+expect PERRY Word
+expect LETTER.TXT
+expect New file
+type Dear PERRY,\nthe 16-bit CPU works.\nRegards
+key UP 2
+key END
+type  :)
+key DOWN 2
+key HOME
+key DEL 4
+type Kind regards
+key F2
+waitidle
+expect Saved LETTER.TXT
+expect Words  9
+key ESC
+waitidle
+type TYPE LETTER.TXT\n
+waitidle
+expect Dear PERRY, :)
+expect the 16-bit CPU works.
+expect Kind regardsrds
+# reopen through the association: .TXT opens in WORD
+type LETTER.TXT\n
+waitidle
+expect Loaded LETTER.TXT
+key ESC
+waitidle
+expect A:\\>
